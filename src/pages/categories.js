@@ -2,37 +2,10 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Button from 'material-ui/Button';
-import Dialog, {
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  DialogActions
-} from 'material-ui/Dialog';
-import Typography from 'material-ui/Typography';
 import { withStyles } from 'material-ui/styles';
-import withRoot from '../components/withRoot';
-
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import IconButton from 'material-ui/IconButton';
-import MenuIcon from 'material-ui-icons/Menu';
-
-import Drawer from 'material-ui/Drawer';
-import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
-import Divider from 'material-ui/Divider';
-
-import SlideshowIcon from 'material-ui-icons/Slideshow';
-import InfoOutlineIcon from 'material-ui-icons/InfoOutline';
-
-import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 
-import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
-
-import TextField from 'material-ui/TextField';
-
-import { Link } from 'react-router-dom';
+import Divider from 'material-ui/Divider';
 
 import Category from '../components/category';
 import CategoryAdder from '../components/categoryAdder';
@@ -43,12 +16,7 @@ const styles = theme => ({
 
 class Categories extends Component {
   state = {
-    deleteDialogOpen: false,
-    addDialogOpen: false,
-
-    spacing: 24,
-    deleteId: 0,
-    deleteName: ''
+    spacing: 24
   };
 
   toggleDrawer = (side, open) => () => {
@@ -67,8 +35,8 @@ class Categories extends Component {
   };
 
   render() {
-    const { classes, theme } = this.props;
-    const { deleteDialogOpen, deleteName, spacing } = this.state;
+    const { classes } = this.props;
+    const { spacing } = this.state;
     return (
       <Grid container justify="center" className={classes.mainContainer}>
         <Grid
@@ -82,6 +50,9 @@ class Categories extends Component {
         >
           <Grid item xs={12}>
             <CategoryAdder />
+          </Grid>
+          <Grid item xs={12}>
+            <Divider />
           </Grid>
           {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(value => (
             <Grid key={value} item xs={12}>
@@ -98,4 +69,4 @@ Categories.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withRoot(withStyles(styles, { withTheme: true })(Categories));
+export default withStyles(styles, { withTheme: true })(Categories);

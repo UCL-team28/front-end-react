@@ -5,4 +5,6 @@ import { render } from 'react-dom';
 
 import Routes from './router/routes';
 
-render(<Routes />, document.querySelector('#root'));
+let store = {};
+
+render(<Routes store={store} />, document.querySelector('#root'));

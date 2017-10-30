@@ -1,16 +1,8 @@
 // src/routes.js
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import withRoot from '../components/withRoot';
 
 import { BrowserRouter, Route, NavLink, Switch } from 'react-router-dom';
-
-import Dialog, {
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  DialogActions
-} from 'material-ui/Dialog';
 
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
@@ -33,11 +25,10 @@ import NoteAddIcon from 'material-ui-icons/NoteAdd';
 import StarsIcon from 'material-ui-icons/Stars';
 import InfoOutlineIcon from 'material-ui-icons/InfoOutline';
 
-import TextField from 'material-ui/TextField';
-
-import JssProvider from 'react-jss/lib/JssProvider';
 import { withStyles, MuiThemeProvider } from 'material-ui/styles';
 import createContext from '../styles/createContext';
+
+import { Provider } from 'react-redux';
 
 const styles = theme => ({
   '@global': {
@@ -116,8 +107,7 @@ const routes = [
 
 class Routes extends Component {
   state = {
-    drawerOpen: false,
-    addDialogOpen: false
+    drawerOpen: false
   };
 
   toggleDrawer = (side, open) => () => {
@@ -143,8 +133,10 @@ class Routes extends Component {
   }
 
   render() {
-    const { classes, theme } = this.props;
-    const { drawerOpen, addDialogOpen } = this.state;
+    const { classes, theme, store } = this.props;
+    const { drawerOpen } = this.state;
+
+    console.log(store);
 
     const context = createContext();
 
@@ -205,7 +197,7 @@ class Routes extends Component {
     );
 
     return (
-      <JssProvider registry={context.sheetsRegistry} jss={context.jss}>
+      <Provider store={store}>
         <MuiThemeProvider
           theme={context.theme}
           sheetsManager={context.sheetsManager}
@@ -229,6 +221,7 @@ class Routes extends Component {
                   >
                     My notebook
                   </Typography>
+                  <Button color="contrast">Log out</Button>
                 </Toolbar>
               </AppBar>
               <Drawer
@@ -242,11 +235,16 @@ class Routes extends Component {
               <main className={classes.mainArea}>
                 <Switch>
                   {routes.map(
-                    r =>
+                    (r, i) =>
                       r.exact ? (
-                        <Route path={r.path} component={r.component} exact />
+                        <Route
+                          key={i}
+                          path={r.path}
+                          component={r.component}
+                          exact
+                        />
                       ) : (
-                        <Route path={r.path} component={r.component} />
+                        <Route key={i} path={r.path} component={r.component} />
                       )
                   )}
                   <Route component={NotFound} />
@@ -255,13 +253,14 @@ class Routes extends Component {
             </div>
           </BrowserRouter>
         </MuiThemeProvider>
-      </JssProvider>
+      </Provider>
     );
   }
 }
 
 Routes.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  store: PropTypes.object.isRequired
 };
 
 export default withStyles(styles, { withTheme: true })(Routes);

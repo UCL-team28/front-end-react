@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Typography from 'material-ui/Typography';
 import { withStyles } from 'material-ui/styles';
-import withRoot from '../components/withRoot';
 
 const styles = theme => ({
   header: {
@@ -14,7 +13,7 @@ const styles = theme => ({
 
 class About extends Component {
   render() {
-    const { classes, theme } = this.props;
+    const { classes } = this.props;
 
     return (
       <div>
@@ -39,4 +38,4 @@ About.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withRoot(withStyles(styles, { withTheme: true })(About));
+export default withStyles(styles, { withTheme: true })(About);

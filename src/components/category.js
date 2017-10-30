@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Typography from 'material-ui/Typography';
 import { withStyles } from 'material-ui/styles';
-import withRoot from '../components/withRoot';
 
 import Paper from 'material-ui/Paper';
 
@@ -13,7 +12,7 @@ import DeleteIcon from 'material-ui-icons/Delete';
 
 const styles = theme => ({
   header: {
-    padding: 24
+    padding: 12
   },
   flexer: {
     display: 'flex',
@@ -26,7 +25,7 @@ const styles = theme => ({
 
 class Category extends Component {
   render() {
-    const { classes, theme } = this.props;
+    const { classes } = this.props;
 
     return (
       <Paper>
@@ -49,4 +48,4 @@ Category.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withRoot(withStyles(styles, { withTheme: true })(Category));
+export default withStyles(styles, { withTheme: true })(Category);

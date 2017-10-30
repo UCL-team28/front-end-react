@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Typography from 'material-ui/Typography';
 import { withStyles } from 'material-ui/styles';
-import withRoot from '../components/withRoot';
 
 import Button from 'material-ui/Button';
 import Paper from 'material-ui/Paper';
@@ -13,7 +12,7 @@ import TextField from 'material-ui/TextField';
 
 import Input, { InputLabel } from 'material-ui/Input';
 import { MenuItem } from 'material-ui/Menu';
-import { FormControl, FormHelperText } from 'material-ui/Form';
+import { FormControl } from 'material-ui/Form';
 import Select from 'material-ui/Select';
 
 const styles = theme => ({
@@ -48,10 +47,10 @@ class Adder extends Component {
   };
 
   render() {
-    const { classes, theme } = this.props;
+    const { classes } = this.props;
 
     return (
-      <Paper elevation={4}>
+      <Paper>
         <form className={classes.content} noValidate autoComplete="off">
           <Typography type="title" color="inherit">
             Add new note
@@ -110,4 +109,4 @@ Adder.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withRoot(withStyles(styles, { withTheme: true })(Adder));
+export default withStyles(styles, { withTheme: true })(Adder);
