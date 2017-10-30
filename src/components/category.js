@@ -12,16 +12,16 @@ import IconButton from 'material-ui/IconButton';
 import DeleteIcon from 'material-ui-icons/Delete';
 
 const styles = theme => ({
-	header: {
-		padding: 24
-	},
-	flexer: {
-		display: 'flex',
-		alignItems: 'center',
-	},
-	delete: {
-		marginLeft: 'auto',
-	}
+  header: {
+    padding: 24
+  },
+  flexer: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+  delete: {
+    marginLeft: 'auto'
+  }
 });
 
 class Category extends Component {
@@ -30,23 +30,23 @@ class Category extends Component {
 
     return (
       <Paper>
-      	<div className={classes.header}>
-      	  <div className={classes.flexer}>
-			  <Typography type="title" color="inherit">
-		        Category
-		      </Typography>
-			  <IconButton className={classes.delete} aria-label="Delete">
-		        <DeleteIcon />
-		      </IconButton>
-      	  </div>
-      	</div>
+        <div className={classes.header}>
+          <div className={classes.flexer}>
+            <Typography type="title" color="inherit">
+              Category
+            </Typography>
+            <IconButton className={classes.delete} aria-label="Delete">
+              <DeleteIcon />
+            </IconButton>
+          </div>
+        </div>
       </Paper>
     );
   }
 }
 
 Category.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 export default withRoot(withStyles(styles, { withTheme: true })(Category));

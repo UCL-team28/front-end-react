@@ -7,7 +7,7 @@ import Dialog, {
   DialogTitle,
   DialogContent,
   DialogContentText,
-  DialogActions,
+  DialogActions
 } from 'material-ui/Dialog';
 import Typography from 'material-ui/Typography';
 import { withStyles } from 'material-ui/styles';
@@ -38,9 +38,7 @@ import Entry from '../components/entry';
 import Adder from '../components/adder';
 
 const styles = theme => ({
-  mainContainer: {
-
-  },
+  mainContainer: {}
 });
 
 class Index extends Component {
@@ -50,46 +48,54 @@ class Index extends Component {
 
     spacing: 24,
     deleteId: 0,
-    deleteName: "",
+    deleteName: ''
   };
 
   toggleDrawer = (side, open) => () => {
     this.setState({
-      [side]: open,
+      [side]: open
     });
   };
 
   openDeleteDialog = (id, name) => () => {
     this.setState({
       deleteId: id,
-      deleteName: name,
+      deleteName: name
     });
 
     this.toggleDrawer('deleteDialogOpen', true)();
-  }
+  };
 
   render() {
     const { classes, theme } = this.props;
     const { deleteDialogOpen, deleteName, spacing } = this.state;
     return (
       <Grid container justify="center" className={classes.mainContainer}>
-          <Grid item sm={12} md={8} lg={6} container spacing={Number(spacing)} className={classes.card}>
-              <Grid item xs={12}>
-                <Adder />
-              </Grid>
-            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(value => (
-              <Grid key={value} item xs={12}>
-                <Entry />
-              </Grid>
-            ))}
+        <Grid
+          item
+          sm={12}
+          md={8}
+          lg={6}
+          container
+          spacing={Number(spacing)}
+          className={classes.card}
+        >
+          <Grid item xs={12}>
+            <Adder />
           </Grid>
+          {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(value => (
+            <Grid key={value} item xs={12}>
+              <Entry />
+            </Grid>
+          ))}
+        </Grid>
       </Grid>
     );
   }
 }
 
 Index.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 export default withRoot(withStyles(styles, { withTheme: true })(Index));

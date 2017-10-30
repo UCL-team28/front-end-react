@@ -9,8 +9,8 @@ import createGenerateClassName from 'material-ui/styles/createGenerateClassName'
 const theme = createMuiTheme({
   palette: {
     primary: blue,
-    secondary: yellow,
-  },
+    secondary: yellow
+  }
 });
 
 // Configure JSS
@@ -26,6 +26,6 @@ export default function createContext() {
     // This is needed in order to deduplicate the injection of CSS in the page.
     sheetsManager,
     // This is needed in order to inject the critical CSS.
-    sheetsRegistry: new SheetsRegistry(),
+    sheetsRegistry: new SheetsRegistry()
   };
 }

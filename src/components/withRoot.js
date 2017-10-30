@@ -14,18 +14,18 @@ const styles = theme => ({
       WebkitFontSmoothing: 'antialiased', // Antialiasing.
       MozOsxFontSmoothing: 'grayscale', // Antialiasing.
       width: '100%',
-      height: '100%',
+      height: '100%'
     },
     body: {
       margin: 0,
       width: '100%',
-      height: '100%',
+      height: '100%'
     },
     '::-webkit-scrollbar': {
-        width: 0,
-        background: 'transparent', /* make scrollbar transparent */
+      width: 0,
+      background: 'transparent' /* make scrollbar transparent */
     }
-  },
+  }
 });
 
 let AppWrapper = props => props.children;
@@ -47,7 +47,10 @@ function withRoot(BaseComponent) {
     render() {
       return (
         <JssProvider registry={context.sheetsRegistry} jss={context.jss}>
-          <MuiThemeProvider theme={context.theme} sheetsManager={context.sheetsManager}>
+          <MuiThemeProvider
+            theme={context.theme}
+            sheetsManager={context.sheetsManager}
+          >
             <AppWrapper>
               <BaseComponent />
             </AppWrapper>
