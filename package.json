@@ -1,0 +1,27 @@
+{
+  "name": "create-react-app",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "jss": "latest",
+    "jss-preset-default": "latest",
+    "material-ui": "next",
+    "material-ui-icons": "^1.0.0-beta.17",
+    "material-ui-upload": "^1.2.1",
+    "prop-types": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-file-input": "^0.2.5",
+    "react-jss": "latest",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "latest",
+    "recompose": "latest"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
