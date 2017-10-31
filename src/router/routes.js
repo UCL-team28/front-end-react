@@ -16,6 +16,7 @@ import Index from '../pages/index';
 import Categories from '../pages/categories';
 import About from '../pages/about';
 import NotFound from '../pages/notFound';
+import Login from '../pages/login';
 
 import Drawer from 'material-ui/Drawer';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
@@ -69,45 +70,42 @@ const styles = theme => ({
     paddingTop: 92,
     height: 'calc(100% - 142px)'
   },
-  containerForm: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  },
-  textField: {
-    width: '100%'
-  },
   textLink: {
     textDecoration: 'none !important'
-  },
-  active: {
-    backgroundColor: theme.palette.secondary[50]
   }
 });
 
 const routes = [
   {
     path: '/',
-    name: '',
+    name: 'Home',
     exact: true,
     component: Index
   },
   {
     path: '/about',
-    name: '',
+    name: 'About',
     exact: false,
     component: About
   },
   {
     path: '/categories',
-    name: '',
+    name: 'Categories',
     exact: false,
     component: Categories
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    exact: false,
+    component: Login
   }
 ];
 
 class Routes extends Component {
   state = {
-    drawerOpen: false
+    drawerOpen: false,
+    token: null
   };
 
   toggleDrawer = (side, open) => () => {
@@ -125,18 +123,20 @@ class Routes extends Component {
   };
 
   componentDidMount() {
-    // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector('#jss-server-side');
-    if (jssStyles && jssStyles.parentNode) {
-      jssStyles.parentNode.removeChild(jssStyles);
-    }
+    this.setState({
+      token: this.props.store.getState().token
+    });
+
+    this.props.store.subscribe(() => {
+      this.setState({
+        token: this.props.store.getState().token
+      });
+    });
   }
 
   render() {
     const { classes, theme, store } = this.props;
-    const { drawerOpen } = this.state;
-
-    console.log(store);
+    const { drawerOpen, token } = this.state;
 
     const context = createContext();
 
@@ -206,14 +206,16 @@ class Routes extends Component {
             <div className={classes.root}>
               <AppBar>
                 <Toolbar>
-                  <IconButton
-                    className={classes.menuButton}
-                    color="contrast"
-                    aria-label="Menu"
-                    onClick={this.toggleDrawer('drawerOpen', true)}
-                  >
-                    <MenuIcon />
-                  </IconButton>
+                  {token && (
+                    <IconButton
+                      className={classes.menuButton}
+                      color="contrast"
+                      aria-label="Menu"
+                      onClick={this.toggleDrawer('drawerOpen', true)}
+                    >
+                      <MenuIcon />
+                    </IconButton>
+                  )}
                   <Typography
                     type="title"
                     color="inherit"
@@ -221,17 +223,19 @@ class Routes extends Component {
                   >
                     My notebook
                   </Typography>
-                  <Button color="contrast">Log out</Button>
+                  {token && <Button color="contrast">Log out</Button>}
                 </Toolbar>
               </AppBar>
-              <Drawer
-                open={drawerOpen}
-                onRequestClose={this.toggleDrawer('drawerOpen', false)}
-              >
-                <div className={classes.drawerHeader} />
-                <Divider />
-                {sideList}
-              </Drawer>
+              {token && (
+                <Drawer
+                  open={drawerOpen}
+                  onRequestClose={this.toggleDrawer('drawerOpen', false)}
+                >
+                  <div className={classes.drawerHeader} />
+                  <Divider />
+                  {sideList}
+                </Drawer>
+              )}
               <main className={classes.mainArea}>
                 <Switch>
                   {routes.map(

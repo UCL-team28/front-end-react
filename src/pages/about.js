@@ -21,13 +21,8 @@ class About extends Component {
           About the project
         </Typography>
         <Typography type="body1" color="inherit">
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum."
+          This is the COMP104 Scenario Week 1 submission of Team 28 (Aleksei
+          Rozhnov, Martin Praski, Maria Iacobici)
         </Typography>
       </div>
     );
@@ -37,5 +32,7 @@ class About extends Component {
 About.propTypes = {
   classes: PropTypes.object.isRequired
 };
+
+About.contextTypes = { store: PropTypes.object };
 
 export default withStyles(styles, { withTheme: true })(About);

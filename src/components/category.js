@@ -24,17 +24,23 @@ const styles = theme => ({
 });
 
 class Category extends Component {
+  deleteCategory = id => () => {};
+
   render() {
-    const { classes } = this.props;
+    const { classes, name, id } = this.props;
 
     return (
       <Paper>
         <div className={classes.header}>
           <div className={classes.flexer}>
-            <Typography type="title" color="inherit">
-              Category
+            <Typography type="subheading" color="inherit">
+              {name}
             </Typography>
-            <IconButton className={classes.delete} aria-label="Delete">
+            <IconButton
+              className={classes.delete}
+              onClick={this.deleteCategory(id)}
+              aria-label="Delete"
+            >
               <DeleteIcon />
             </IconButton>
           </div>
@@ -45,7 +51,9 @@ class Category extends Component {
 }
 
 Category.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  name: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired
 };
 
 export default withStyles(styles, { withTheme: true })(Category);

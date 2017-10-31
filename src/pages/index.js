@@ -17,12 +17,26 @@ const styles = theme => ({
 
 class Index extends Component {
   state = {
-    spacing: 24
+    spacing: 24,
+    notes: []
   };
+
+  componentDidMount() {
+    this.setState({
+      notes: this.context.store.getState().notes
+    });
+
+    this.context.store.subscribe(() => {
+      this.setState({
+        notes: this.context.store.getState().notes
+      });
+    });
+  }
 
   render() {
     const { classes } = this.props;
-    const { spacing } = this.state;
+    const { spacing, notes } = this.state;
+
     return (
       <Grid container justify="center" className={classes.mainContainer}>
         <Grid
@@ -40,9 +54,22 @@ class Index extends Component {
           <Grid item xs={12}>
             <Divider />
           </Grid>
-          {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(value => (
-            <Grid key={value} item xs={12}>
-              <Entry />
+          {notes.map(note => (
+            <Grid key={note.id} item xs={12}>
+              <Entry
+                id={note.id}
+                created={note.date}
+                name="Name of the note"
+                content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                  ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                  aliquip ex ea commodo consequat. Duis aute irure dolor in
+                  reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                  pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                  culpa qui officia deserunt mollit anim id est laborum."
+                media="https://picsum.photos/600/400"
+                mediaType="image"
+              />
             </Grid>
           ))}
         </Grid>
@@ -54,5 +81,7 @@ class Index extends Component {
 Index.propTypes = {
   classes: PropTypes.object.isRequired
 };
+
+Index.contextTypes = { store: PropTypes.object };
 
 export default withStyles(styles, { withTheme: true })(Index);

@@ -21,4 +21,6 @@ NotFound.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
+NotFound.contextTypes = { store: PropTypes.object };
+
 export default withStyles(styles, { withTheme: true })(NotFound);

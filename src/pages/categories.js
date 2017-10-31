@@ -16,8 +16,21 @@ const styles = theme => ({
 
 class Categories extends Component {
   state = {
-    spacing: 24
+    spacing: 24,
+    categories: []
   };
+
+  componentDidMount() {
+    this.setState({
+      categories: this.context.store.getState().categories
+    });
+
+    this.context.store.subscribe(() => {
+      this.setState({
+        categories: this.context.store.getState().categories
+      });
+    });
+  }
 
   toggleDrawer = (side, open) => () => {
     this.setState({
@@ -36,7 +49,7 @@ class Categories extends Component {
 
   render() {
     const { classes } = this.props;
-    const { spacing } = this.state;
+    const { spacing, categories } = this.state;
     return (
       <Grid container justify="center" className={classes.mainContainer}>
         <Grid
@@ -54,9 +67,9 @@ class Categories extends Component {
           <Grid item xs={12}>
             <Divider />
           </Grid>
-          {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(value => (
-            <Grid key={value} item xs={12}>
-              <Category />
+          {categories.map(category => (
+            <Grid key={category.id} item xs={12}>
+              <Category id={category.id} name={category.name} />
             </Grid>
           ))}
         </Grid>
@@ -68,5 +81,7 @@ class Categories extends Component {
 Categories.propTypes = {
   classes: PropTypes.object.isRequired
 };
+
+Categories.contextTypes = { store: PropTypes.object };
 
 export default withStyles(styles, { withTheme: true })(Categories);

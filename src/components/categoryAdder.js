@@ -34,12 +34,18 @@ const styles = theme => ({
 
 class CategoryAdder extends Component {
   state = {
-    age: ''
+    category: ''
   };
 
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
   };
+
+  canAddCategory = () => {
+    return this.state.category === '';
+  };
+
+  addCategory = () => {};
 
   render() {
     const { classes } = this.props;
@@ -54,9 +60,16 @@ class CategoryAdder extends Component {
             id="name"
             label="Name"
             className={classes.textField}
+            onChange={this.handleChange('category')}
             margin="normal"
           />
-          <Button raised color="primary" className={classes.button}>
+          <Button
+            raised
+            color="primary"
+            className={classes.button}
+            disabled={this.canAddCategory()}
+            onClick={this.addCategory}
+          >
             Add category
           </Button>
         </form>

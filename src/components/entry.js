@@ -39,37 +39,57 @@ const styles = theme => ({
 });
 
 class Entry extends Component {
+  deleteEntry = id => () => {};
+
   render() {
-    const { classes } = this.props;
+    const {
+      classes,
+      name,
+      category,
+      content,
+      media,
+      mediaType,
+      id,
+      created
+    } = this.props;
 
     return (
       <Paper>
         <div className={classes.header}>
           <div className={classes.flexer}>
             <Typography type="title" color="inherit">
-              Title of the note
+              {name}
             </Typography>
-            <IconButton className={classes.delete} aria-label="Delete">
+            <IconButton
+              className={classes.delete}
+              aria-label="Delete"
+              onClick={this.deleteEntry(id)}
+            >
               <DeleteIcon />
             </IconButton>
           </div>
           <Typography type="body1" color="inherit" className={classes.caption}>
-            10.09.2017
+            {created}
           </Typography>
         </div>
         <div className={classes.content}>
           <Typography type="body1" color="inherit">
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum."
+            {content}
           </Typography>
         </div>
         <div className={classes.media}>
-          <img src="https://picsum.photos/600/400" className={classes.image} />
+          {(() => {
+            switch (mediaType) {
+              case 'image':
+                return <img src={media} className={classes.image} />;
+              case 'video':
+                return (
+                  <video controls>
+                    <source src={media} type="video/mp4" />
+                  </video>
+                );
+            }
+          })()}
         </div>
       </Paper>
     );
@@ -77,7 +97,14 @@ class Entry extends Component {
 }
 
 Entry.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  name: PropTypes.string.isRequired,
+  category: PropTypes.string,
+  content: PropTypes.string.isRequired,
+  media: PropTypes.string,
+  mediaType: PropTypes.oneOf(['image', 'video']),
+  id: PropTypes.number.isRequired,
+  created: PropTypes.string.isRequired
 };
 
 export default withStyles(styles, { withTheme: true })(Entry);

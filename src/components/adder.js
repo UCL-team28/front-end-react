@@ -39,15 +39,39 @@ const styles = theme => ({
 
 class Adder extends Component {
   state = {
-    age: ''
+    name: '',
+    content: '',
+    category: '',
+    file: '',
+
+    categories: []
   };
+
+  componentDidMount() {
+    this.setState({
+      categories: this.context.store.getState().categories
+    });
+
+    this.context.store.subscribe(() => {
+      this.setState({
+        categories: this.context.store.getState().categories
+      });
+    });
+  }
 
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
   };
 
+  addNote = () => {};
+
+  canAddNote = () => {
+    return this.state.name === '' || this.state.content === '';
+  };
+
   render() {
     const { classes } = this.props;
+    const { categories } = this.state;
 
     return (
       <Paper>
@@ -59,21 +83,22 @@ class Adder extends Component {
             id="name"
             label="Name"
             className={classes.textField}
+            onChange={this.handleChange('name')}
             margin="normal"
           />
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="age-simple">Category</InputLabel>
             <Select
-              value={this.state.age}
-              onChange={this.handleChange('age')}
-              input={<Input id="age-simple" />}
+              value={this.state.category}
+              onChange={this.handleChange('category')}
+              input={<Input id="category-chooser" />}
             >
-              <MenuItem value="">
+              <MenuItem value="-1">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              {categories.map(category => (
+                <MenuItem value={category.id}>{category.name}</MenuItem>
+              ))}
             </Select>
           </FormControl>
           <TextField
@@ -82,6 +107,7 @@ class Adder extends Component {
             multiline
             rows="8"
             className={classes.textField}
+            onChange={this.handleChange('content')}
             margin="normal"
           />
           <input
@@ -96,7 +122,13 @@ class Adder extends Component {
               Add media
             </Button>
           </label>
-          <Button raised color="primary" className={classes.button}>
+          <Button
+            raised
+            color="primary"
+            className={classes.button}
+            disabled={this.canAddNote()}
+            onClick={this.addNote}
+          >
             Add note
           </Button>
         </form>
@@ -108,5 +140,7 @@ class Adder extends Component {
 Adder.propTypes = {
   classes: PropTypes.object.isRequired
 };
+
+Adder.contextTypes = { store: PropTypes.object };
 
 export default withStyles(styles, { withTheme: true })(Adder);
