@@ -10,6 +10,11 @@ import Divider from 'material-ui/Divider';
 import Category from '../components/category';
 import CategoryAdder from '../components/categoryAdder';
 
+import {
+  getCategories
+} from '../actions';
+
+
 const styles = theme => ({
   mainContainer: {}
 });
@@ -30,6 +35,8 @@ class Categories extends Component {
         categories: this.context.store.getState().categories
       });
     });
+
+    this.context.store.dispatch(getCategories());
   }
 
   toggleDrawer = (side, open) => () => {

@@ -10,7 +10,16 @@ import Paper from 'material-ui/Paper';
 import IconButton from 'material-ui/IconButton';
 import DeleteIcon from 'material-ui-icons/Delete';
 
+import {
+  deleteNote
+} from '../actions';
+
+import classNames from 'classnames';
+
 const styles = theme => ({
+  opaque: {
+    opacity: 0.5,
+  },
   header: {
     padding: 24
   },
@@ -39,7 +48,17 @@ const styles = theme => ({
 });
 
 class Entry extends Component {
-  deleteEntry = id => () => {};
+  state = {
+    opaque: false,
+  }
+
+  deleteEntry = id => () => {
+    this.setState({
+      opaque: true,
+    });
+
+    this.context.store.dispatch(deleteNote(1, id));
+  };
 
   render() {
     const {
@@ -53,8 +72,14 @@ class Entry extends Component {
       created
     } = this.props;
 
+    const { opaque } = this.state;
+
+    let opaqueClass = classNames({
+      'opaque': opaque,
+    });
+
     return (
-      <Paper>
+      <Paper className={opaqueClass}>
         <div className={classes.header}>
           <div className={classes.flexer}>
             <Typography type="title" color="inherit">
@@ -69,7 +94,7 @@ class Entry extends Component {
             </IconButton>
           </div>
           <Typography type="body1" color="inherit" className={classes.caption}>
-            {created}
+            {category && `${category} ●` } {created}
           </Typography>
         </div>
         <div className={classes.content}>
@@ -106,5 +131,7 @@ Entry.propTypes = {
   id: PropTypes.number.isRequired,
   created: PropTypes.string.isRequired
 };
+
+Entry.contextTypes = { store: PropTypes.object };
 
 export default withStyles(styles, { withTheme: true })(Entry);

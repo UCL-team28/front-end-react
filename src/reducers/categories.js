@@ -1,9 +1,14 @@
+import {
+  REQUEST_CATEGORIES,
+  RECEIVE_CATEGORIES,
+  ADD_CATEGORY,
+  DELETE_CATEGORY
+} from '../actions';
+
 const categories = (state = [], action) => {
   switch (action.type) {
-    case 'ADD_CATEGORY':
-      return [...state, action.category];
-    case 'DELETE_CATEGORY':
-      return state.filter(category => category.id !== action.id);
+    case RECEIVE_CATEGORIES:
+      return action.categories;
     default:
       return state;
   }

@@ -18,9 +18,9 @@ export class Category {
 }
 
 export class CreateNote {
-  constructor(name, category, content, media, mediaType) {
+  constructor(name, category_id, content, media, mediaType) {
     this.name = name;
-    this.category = category;
+    this.category_id = category_id;
     this.content = content;
     this.media = media;
     this.mediaType = mediaType;
@@ -28,7 +28,7 @@ export class CreateNote {
 }
 
 export class CreateCategory {
-  constructor(name) {
-    this.name = name;
+  constructor(category) {
+    this.category = category;
   }
 }

@@ -10,6 +10,12 @@ import Paper from 'material-ui/Paper';
 
 import TextField from 'material-ui/TextField';
 
+import { CreateCategory } from '../models';
+
+import {
+  addCategory
+} from '../actions';
+
 const styles = theme => ({
   content: {
     padding: 24,
@@ -45,7 +51,13 @@ class CategoryAdder extends Component {
     return this.state.category === '';
   };
 
-  addCategory = () => {};
+  addCategory = () => {
+    let category = new CreateCategory(this.state.category);
+    this.context.store.dispatch(addCategory(category));
+    this.setState({
+      category: ''
+    });
+  };
 
   render() {
     const { classes } = this.props;
@@ -81,5 +93,7 @@ class CategoryAdder extends Component {
 CategoryAdder.propTypes = {
   classes: PropTypes.object.isRequired
 };
+
+CategoryAdder.contextTypes = { store: PropTypes.object };
 
 export default withStyles(styles, { withTheme: true })(CategoryAdder);

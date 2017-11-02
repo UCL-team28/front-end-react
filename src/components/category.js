@@ -10,6 +10,10 @@ import Paper from 'material-ui/Paper';
 import IconButton from 'material-ui/IconButton';
 import DeleteIcon from 'material-ui-icons/Delete';
 
+import {
+  deleteCategory
+} from '../actions';
+
 const styles = theme => ({
   header: {
     padding: 12
@@ -24,7 +28,9 @@ const styles = theme => ({
 });
 
 class Category extends Component {
-  deleteCategory = id => () => {};
+  deleteCategory = id => () => {
+    this.context.store.dispatch(deleteCategory(id));
+  };
 
   render() {
     const { classes, name, id } = this.props;
@@ -55,5 +61,7 @@ Category.propTypes = {
   name: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired
 };
+
+Category.contextTypes = { store: PropTypes.object };
 
 export default withStyles(styles, { withTheme: true })(Category);

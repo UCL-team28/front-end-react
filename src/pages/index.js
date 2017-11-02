@@ -11,6 +11,10 @@ import Divider from 'material-ui/Divider';
 import Entry from '../components/entry';
 import Adder from '../components/adder';
 
+import {
+  getNotes
+} from '../actions';
+
 const styles = theme => ({
   mainContainer: {}
 });
@@ -31,6 +35,8 @@ class Index extends Component {
         notes: this.context.store.getState().notes
       });
     });
+
+    this.context.store.dispatch(getNotes(1))
   }
 
   render() {
@@ -59,16 +65,11 @@ class Index extends Component {
               <Entry
                 id={note.id}
                 created={note.date}
-                name="Name of the note"
-                content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                  ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat. Duis aute irure dolor in
-                  reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                  pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                  culpa qui officia deserunt mollit anim id est laborum."
-                media="https://picsum.photos/600/400"
-                mediaType="image"
+                name={note.name}
+                content={note.content}
+                category={note.category}
+                media={note.media}
+                mediaType={note.media_type}
               />
             </Grid>
           ))}

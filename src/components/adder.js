@@ -15,6 +15,13 @@ import { MenuItem } from 'material-ui/Menu';
 import { FormControl } from 'material-ui/Form';
 import Select from 'material-ui/Select';
 
+import { CreateNote } from '../models';
+import {
+  addNote,
+  getCategories
+} from '../actions';
+
+
 const styles = theme => ({
   content: {
     padding: 24,
@@ -57,13 +64,24 @@ class Adder extends Component {
         categories: this.context.store.getState().categories
       });
     });
+
+    this.context.store.dispatch(getCategories());
   }
 
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
   };
 
-  addNote = () => {};
+  addNote = () => {
+    let note = new CreateNote(this.state.name, this.state.category, this.state.content, "", "");
+    this.context.store.dispatch(addNote(1, note));
+    this.setState({
+      name: '',
+      content: '',
+      category: '',
+      file: '',
+    });
+  };
 
   canAddNote = () => {
     return this.state.name === '' || this.state.content === '';
