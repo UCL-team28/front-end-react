@@ -12,6 +12,9 @@ export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
 export const ADD_CATEGORY = 'ADD_CATEGORY'
 export const DELETE_CATEGORY = 'DELETE_CATEGORY'
 
+export const LOGIN = 'LOGIN'
+export const LOGOUT = 'LOGOUT'
+
 function requestNotes(notebook) {
   return {
     type: REQUEST_NOTES,
@@ -109,14 +112,13 @@ export const deleteCategory = (id) => {
 
 export const login = (email, pass) => {
   return {
-    type: 'LOGIN',
-    email: email,
-    pass: pass
+    type: LOGIN,
+    token: 'hihi',
   };
 };
 
 export const logout = () => {
   return {
-    type: 'LOGOUT'
+    type: LOGOUT
   };
 };

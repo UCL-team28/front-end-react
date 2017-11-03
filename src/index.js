@@ -11,7 +11,6 @@ import mock from './models/mock';
 import thunkMiddleware from 'redux-thunk'
 
 let store = createStore(notesApp, 
-	{},  
 	applyMiddleware(
       thunkMiddleware
     ));

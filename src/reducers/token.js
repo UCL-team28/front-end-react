@@ -1,8 +1,13 @@
+import {
+  LOGIN,
+  LOGOUT,
+} from '../actions';
+
 const token = (state = [], action) => {
   switch (action.type) {
-    case 'LOGIN':
-      return ['token'];
-    case 'LOGOUT':
+    case LOGIN:
+      return action.token;
+    case LOGOUT:
       return null;
     default:
       return state;

@@ -9,8 +9,6 @@ const notes = (state = [], action) => {
   switch (action.type) {
   	case RECEIVE_NOTES:
       return action.notes;
-    case ADD_NOTE:
-      return [...state, action.note];
     default:
       return state;
   }
