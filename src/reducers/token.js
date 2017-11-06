@@ -1,7 +1,4 @@
-import {
-  LOGIN,
-  LOGOUT,
-} from '../actions';
+import { LOGIN, LOGOUT } from '../actions';
 
 const token = (state = [], action) => {
   switch (action.type) {

@@ -31,9 +31,7 @@ import createContext from '../styles/createContext';
 
 import { Provider } from 'react-redux';
 
-import {
-  logout
-} from '../actions';
+import { logout } from '../actions';
 
 const styles = theme => ({
   '@global': {
@@ -136,15 +134,19 @@ class Routes extends Component {
     });
 
     this.props.store.subscribe(() => {
-      this.setState({
-        token: this.props.store.getState().token
-      });
+      if (this.props.store.getState().token === this.state.token) {
+        return;
+      }
 
-      if(!this.props.store.getState().token) {
+      if (!this.props.store.getState().token) {
         this.rout.history.push('/login');
       } else {
         this.rout.history.push('/');
       }
+
+      this.setState({
+        token: this.props.store.getState().token
+      });
     });
   }
 
@@ -216,7 +218,11 @@ class Routes extends Component {
           theme={context.theme}
           sheetsManager={context.sheetsManager}
         >
-          <BrowserRouter ref={(rout) => { this.rout = rout; }} >
+          <BrowserRouter
+            ref={rout => {
+              this.rout = rout;
+            }}
+          >
             <div className={classes.root}>
               <AppBar>
                 <Toolbar>
@@ -237,7 +243,11 @@ class Routes extends Component {
                   >
                     My notebook
                   </Typography>
-                  {token && <Button color="contrast" onClick={this.logout}>Log out</Button>}
+                  {token && (
+                    <Button color="contrast" onClick={this.logout}>
+                      Log out
+                    </Button>
+                  )}
                 </Toolbar>
               </AppBar>
               {token && (

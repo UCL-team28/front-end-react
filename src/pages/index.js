@@ -11,9 +11,7 @@ import Divider from 'material-ui/Divider';
 import Entry from '../components/entry';
 import Adder from '../components/adder';
 
-import {
-  getNotes
-} from '../actions';
+import { getNotes } from '../actions';
 
 const styles = theme => ({
   mainContainer: {}
@@ -36,7 +34,7 @@ class Index extends Component {
       });
     });
 
-    this.context.store.dispatch(getNotes(1))
+    this.context.store.dispatch(getNotes(1));
   }
 
   render() {

@@ -7,7 +7,7 @@ import {
 
 const notes = (state = [], action) => {
   switch (action.type) {
-  	case RECEIVE_NOTES:
+    case RECEIVE_NOTES:
       return action.notes;
     default:
       return state;

@@ -16,11 +16,7 @@ import { FormControl } from 'material-ui/Form';
 import Select from 'material-ui/Select';
 
 import { CreateNote } from '../models';
-import {
-  addNote,
-  getCategories
-} from '../actions';
-
+import { addNote, getCategories } from '../actions';
 
 const styles = theme => ({
   content: {
@@ -73,13 +69,19 @@ class Adder extends Component {
   };
 
   addNote = () => {
-    let note = new CreateNote(this.state.name, this.state.category, this.state.content, "", "");
+    let note = new CreateNote(
+      this.state.name,
+      this.state.category,
+      this.state.content,
+      '',
+      ''
+    );
     this.context.store.dispatch(addNote(1, note));
     this.setState({
       name: '',
       content: '',
       category: '',
-      file: '',
+      file: ''
     });
   };
 

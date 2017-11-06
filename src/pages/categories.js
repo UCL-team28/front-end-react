@@ -10,10 +10,7 @@ import Divider from 'material-ui/Divider';
 import Category from '../components/category';
 import CategoryAdder from '../components/categoryAdder';
 
-import {
-  getCategories
-} from '../actions';
-
+import { getCategories } from '../actions';
 
 const styles = theme => ({
   mainContainer: {}

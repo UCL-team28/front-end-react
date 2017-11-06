@@ -10,9 +10,7 @@ import Paper from 'material-ui/Paper';
 import IconButton from 'material-ui/IconButton';
 import DeleteIcon from 'material-ui-icons/Delete';
 
-import {
-  deleteCategory
-} from '../actions';
+import { deleteCategory } from '../actions';
 
 const styles = theme => ({
   header: {

@@ -12,9 +12,7 @@ import TextField from 'material-ui/TextField';
 
 import { CreateCategory } from '../models';
 
-import {
-  addCategory
-} from '../actions';
+import { addCategory } from '../actions';
 
 const styles = theme => ({
   content: {

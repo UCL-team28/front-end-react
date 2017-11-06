@@ -12,13 +12,10 @@ import Button from 'material-ui/Button';
 
 import TextField from 'material-ui/TextField';
 
-import {
-  login
-} from '../actions';
+import { login } from '../actions';
 
 const styles = theme => ({
-  mainContainer: {
-  },
+  mainContainer: {},
   card: {
     padding: 24,
     display: 'flex',
@@ -52,11 +49,11 @@ const styles = theme => ({
     marginLeft: 'auto'
   },
   textField: {
-    width: '100%',
+    width: '100%'
   },
   button: {
     marginTop: 24,
-    marginLeft: 'auto',
+    marginLeft: 'auto'
   }
 });
 
@@ -65,7 +62,7 @@ class Login extends Component {
     spacing: 24,
 
     email: '',
-    password: '',
+    password: ''
   };
 
   handleChange = name => event => {

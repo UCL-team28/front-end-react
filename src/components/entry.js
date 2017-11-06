@@ -10,15 +10,13 @@ import Paper from 'material-ui/Paper';
 import IconButton from 'material-ui/IconButton';
 import DeleteIcon from 'material-ui-icons/Delete';
 
-import {
-  deleteNote
-} from '../actions';
+import { deleteNote } from '../actions';
 
 import classNames from 'classnames';
 
 const styles = theme => ({
   opaque: {
-    opacity: 0.5,
+    opacity: 0.5
   },
   header: {
     padding: 24
@@ -49,12 +47,12 @@ const styles = theme => ({
 
 class Entry extends Component {
   state = {
-    opaque: false,
-  }
+    opaque: false
+  };
 
   deleteEntry = id => () => {
     this.setState({
-      opaque: true,
+      opaque: true
     });
 
     this.context.store.dispatch(deleteNote(1, id));
@@ -75,7 +73,7 @@ class Entry extends Component {
     const { opaque } = this.state;
 
     let opaqueClass = classNames({
-      'opaque': opaque,
+      opaque: opaque
     });
 
     return (
@@ -94,7 +92,7 @@ class Entry extends Component {
             </IconButton>
           </div>
           <Typography type="body1" color="inherit" className={classes.caption}>
-            {category && `${category} ●` } {created}
+            {category && `${category} ●`} {created}
           </Typography>
         </div>
         <div className={classes.content}>
